@@ -3,11 +3,17 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import numpy as np
 import os
+import cv2
 
 def resize_and_rescale_img(image_path, w, h, output_path_, output_filename):
     # This will resize the image to width x height dimensions and then scale down in the range of [0-1]   
     if os.path.isfile(image_path):
         img = Image.open(image_path)
+        width, height = img.size
+        lr = (width - w) // 2
+        tb = (height - h) // 2
+        #img = img.convert("RGB")
+        #img = img.crop((lr, tb, lr, tb))
         img_resized = img.resize(size=(w, h))
         if not os.path.exists(output_path_):
             os.makedirs(output_path_)
